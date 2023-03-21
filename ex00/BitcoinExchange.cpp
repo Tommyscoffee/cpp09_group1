@@ -15,9 +15,13 @@ std::string trim(const std::string& string, const char* trimCharacterList = " \t
 
 int calcMaxDay(int i_year,int i_month)
 {
-	if (i_year % 4 == 0 && i_month ==  2)//うるう年
+	if (i_year % 400 == 0 && i_month == 2)
 		return (29);
-	if ((i_month <= 7 && i_month % 2 == 1) ||(i_month >= 8 && i_month % 2 == 0))//３０か３１かを判定
+	else if (i_year % 100 == 0 && i_month == 2)
+		return (28);
+	else if (i_year % 4 == 0 && i_month ==  2)//うるう年
+		return (29);
+	else if ((i_month <= 7 && i_month % 2 == 1) ||(i_month >= 8 && i_month % 2 == 0))//３０か３１かを判定
 		return (31);
 	else if (i_month == 2)
 		return (28);
@@ -86,6 +90,11 @@ bool	parseDate(std::string s_date, std::string &s_year, std::string &s_month, st
 	}
 	else
 		i_day = std::stoi(s_day);
+	if (s_date.size() != 10)
+	{
+		std::cout << "Error: date format is wrong." << std::endl;
+		return (ERROR);
+	}
 	if (isOldDate(i_year, i_month, i_day))
 	{
 		return (ERROR);
@@ -195,11 +204,12 @@ bool putLine(std::string input_file_line, std::map<std::string, double> map_bitc
 		if (isInvalidValue(d_value))
 			return (ERROR);
 	}
+
 	d_rate = findRate(map_bitcoin_csv, s_date);//3はcsvファイルで検索した日時のレートの代わりに書いています。
 	if (d_rate < 0)
 		return (ERROR);
 	int dot_pos = 2;
-	d_mult_res = d_rate * d_value;
+	d_mult_res = round(d_rate * d_value * 1000) / 1000;
 	s_mult_res = std::to_string(d_mult_res);
 	dot_pos = 6 - countPrecision(s_mult_res);//doubleは小数点以下が6桁だから
 	std::cout << std::fixed << std::setprecision(dot_pos) << s_year << "-" << s_month << "-" << s_day << " => " << d_value << " = " << d_mult_res << std::endl;
@@ -231,7 +241,6 @@ bool validateFirstLine(std::ifstream &input_file)
 	if (s_input_file_line != "date | value")
 	{
 		std::cout << "Error: file's first line is not 'date | value'." << std::endl;
-		return (ERROR);
 	}
 	return (SUCCESS);
 }

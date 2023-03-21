@@ -13,18 +13,21 @@ int main(int argc, char **argv)
 		std::cout << "Error: cannot open to file." << std::endl;
 		return (-1);
 	}
-	if (validateFirstLine(input_file))
-		return (-1);
-	debug;
+	validateFirstLine(input_file);
+	// すべての出力が終わるまで出力しない気ない
 	if (storeBitcoinCsvToMap(map_bitcoin_csv))
 	{
 		return (ERROR);
 	}
-	debug;
+
 	while (std::getline(input_file, s_input_file_line, '\n'))
 	{
 		size_t	pipe_pos;
-
+		if (s_input_file_line == "")
+		{
+			std::cout << "Error: bad input => " << s_input_file_line << std::endl;
+			continue;
+		}
 		pipe_pos = s_input_file_line.find("|");
 		if  (pipe_pos == std::string::npos)
 		{

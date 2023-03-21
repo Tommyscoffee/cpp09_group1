@@ -31,13 +31,13 @@ int main(int argc, char* argv[])
 	s = std::clock();
     mergeInsertionSort(deq, 0, deq.size() - 1);
     e = std::clock();
-	deque_time = (double)(e - s) / CLOCKS_PER_SEC * 1000;
+	deque_time = (double)(e - s) / CLOCKS_PER_SEC * ( 1000000 );
 	putArr("After : ", deq);
 
 	s = std::clock();
 	mergeInsertionSort(vec, 0, vec.size() - 1);
 	e = std::clock();
-	vector_time = (double)(e - s) / CLOCKS_PER_SEC * 1000;
+	vector_time = (double)(e - s) / CLOCKS_PER_SEC * ( 1000000 ) ;
 
 	std::cout << "Time to process a range of " << deq.size() << " elements with std::deque : " << deque_time << " us" << std::endl;
 	std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " << vector_time << " us" << std::endl;
