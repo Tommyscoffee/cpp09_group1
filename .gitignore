@@ -1,0 +1,13 @@
+//オブジェクトファイル
+*.o
+
+//実行ファイル
+btc
+RPN
+PmergeMe
+
+//ex00
+ex00/testdir/
+
+//pdf
+*.pdf
