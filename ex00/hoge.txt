@@ -1,9 +1,0 @@
-
-Error: invalid day. => 30
-Error: YMD format is wrong.
-Error: date is so old.
-2012-02-29 => 1.200 = 5.976
-Error: invalid day. => 29
-Error: bad input => 1.2 a
-Error: YMD format is wrong.
-Error: bad input =>     

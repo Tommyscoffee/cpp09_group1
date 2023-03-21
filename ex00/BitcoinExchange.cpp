@@ -161,7 +161,7 @@ double findRate(std::map<std::string, double> map_bitcoin_csv, std::string s_dat
 
 	if (is_just_match == false && rate_itr != map_bitcoin_csv.begin())
 		--rate_itr;
-	//文字列比較で最古のデータより前を参照しようとしたら
+
 	return (rate_itr->second);
 }
 

@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	validateFirstLine(input_file);
-	// すべての出力が終わるまで出力しない気ない
+
 	if (storeBitcoinCsvToMap(map_bitcoin_csv))
 	{
 		return (ERROR);
